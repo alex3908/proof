@@ -1,0 +1,4 @@
+example_id                                | status | run_time        |
+----------------------------------------- | ------ | --------------- |
+./spec/reservamos/kueski_pay_spec.rb[1:1] | passed | 0.02371 seconds |
+./spec/reservamos/kueski_pay_spec.rb[1:2] | failed | 0.2144 seconds  |
