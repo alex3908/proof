@@ -1,0 +1,85 @@
+{
+	"variables": [],
+	"info": {
+		"name": "Kueski Pay API Everyone",
+		"_postman_id": "34c8af7f-ffbb-03ad-d73c-73552fa555d8",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Payment",
+			"description": "",
+			"item": [
+				{
+					"name": "Payment Creation",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var code = pm.iterationData.get(\"expected_status\");",
+									"console.log('Expected Code Status:' + code);",
+									"pm.test(\"Status code validation\", function () {",
+									"    pm.response.to.have.status(code);",
+									"});",
+									"console.log('Responde:\\n' + pm.response);"
+								]
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var current_body = pm.iterationData.get(\"payment_body\");",
+									"var current_scenario = pm.iterationData.get(\"scenario\");",
+									"console.log('Running Scenario: ' + current_scenario);",
+									"console.log('Body For Test:\\n' + current_body);"
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "https://testing.kueskipay.com/v1/payments",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "kp-name",
+								"value": "vtex",
+								"type": "text"
+							},
+							{
+								"key": "kp-source",
+								"value": "postman",
+								"type": "text"
+							},
+							{
+								"key": "kp-version",
+								"value": "1.0",
+								"type": "text"
+							},
+							{
+								"key": "kp-trigger",
+								"value": "button",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"order_id\": \"Order {{$timestamp}}\",\n  \"description\": \"Calzado y Accesorios\",\n  \"amount\": {\n    \"total\": 1177.9,\n    \"currency\": \"MXN\",\n        \"details\": {\n            \"subtotal\": 852.28,\n            \"shipping\": 200,\n            \"tax\": 125.65,\n            \"handling_fee\": -0.03\n        }\n  }\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
